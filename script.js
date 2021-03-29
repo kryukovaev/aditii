@@ -82,3 +82,28 @@ const addToCard = (product) => cart;
 const productsList = new ProductsList();
 productsList.fetchProducts();
 productsList.render(".products-list");
+
+const fetch = (method, url) => {
+  let xhr;
+
+  if (window.XMLHttpRequest) {
+    xhr = new XMLHttpRequest();
+  } else if (window.ActiveXObject) {
+    xhr = new ActiveXObject("Microsoft.XMLHTTp");
+  }
+
+  xhr.onereadystatechange = () => {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      const images = JSON.parse(xhr.responseText);
+      console.log(images, images);
+    }
+  };
+
+  xhr.open(method, url);
+  xhr.setRequestHeader("x-custom", "my custom header");
+  xhr.timeout = 15000;
+  xhr.send();
+};
+
+const URL = "https://";
+fetch("GET", URL);
